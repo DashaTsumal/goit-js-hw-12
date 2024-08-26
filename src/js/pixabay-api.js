@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://pixabay.com/api/';
+axios.defaults.baseURL = 'https://pixabay.com/api';
 
 export async function fetchParams({ q = '', page = 1, per_page = 15 }) {
   const API_KEY = '44767976-5c84653ee99974363117d019c';
@@ -14,11 +14,5 @@ export async function fetchParams({ q = '', page = 1, per_page = 15 }) {
     per_page,
   });
 
-   try {
-    const response = await axios.get(`?${OPTIONS.toString()}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching data from Pixabay:', error);
-    throw error;
-  }
+  return (await axios.get(`?${OPTIONS.toString()}`)).data;
 }
